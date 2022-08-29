@@ -1,0 +1,5 @@
+redis-py-cluster
+pyarrow
+s3fs
+snappy
+boto3==1.21.21

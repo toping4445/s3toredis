@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ManifoldHP: High-precision variant &#8212; SnapPy 3.0.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Triangulation" href="triangulation.html" />
+    <link rel="prev" title="Manifold: the main class" href="manifold.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="triangulation.html" title="Triangulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="manifold.html" title="Manifold: the main class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 3.0.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" accesskey="U">The snappy module and its classes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ManifoldHP: High-precision variant</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="manifoldhp-high-precision-variant">
+<h1>ManifoldHP: High-precision variant<a class="headerlink" href="#manifoldhp-high-precision-variant" title="Permalink to this headline">¶</a></h1>
+<p>A ManifoldHP is a variant of <a class="reference internal" href="manifold.html#snappy.Manifold" title="snappy.Manifold"><code class="xref py py-class docutils literal notranslate"><span class="pre">Manifold</span></code></a> which
+does all floating-point calculations in <a class="reference external" href="http://web.mit.edu/tabbott/Public/quaddouble-debian/qd-2.3.4-old/docs/qd.pdf">quad-double precision</a>,
+which has four times as many significant digits as the ordinary
+<a class="reference external" href="http://en.wikipedia.org/wiki/Double_precision_floating-point_format">double precision numbers</a>
+used by Manifold.  More precisely, numbers used in ManifoldHP have 212
+bits for the mantissa/significand (roughly 63 decimal digits) versus
+53 bits with Manifold.</p>
+<p>To the user, the only difference between Manifold and ManifoldHP is the extra precision:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;m004&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="o">.</span><span class="n">volume</span><span class="p">()</span>
+<span class="go">2.02988321282</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">ManifoldHP</span><span class="p">(</span><span class="s1">&#39;m004&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="o">.</span><span class="n">volume</span><span class="p">()</span>
+<span class="go">2.029883212819307250042405108549040571883378615060599584034978214</span>
+</pre></div>
+</div>
+<p>and it is easy to go back and forth between the two types:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">low_precision</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="o">.</span><span class="n">volume</span><span class="p">(),</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="go">(2.02988321282, &lt;class &#39;snappy.Manifold&#39;&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">high_precision</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="go">&lt;class &#39;snappy.ManifoldHP&#39;&gt;</span>
+</pre></div>
+</div>
+<section id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<ol class="upperalpha simple" start="17">
+<li><p>How does this differ from the program <a class="reference external" href="http://snap-pari.sourceforge.net/">Snap</a> or the <a class="reference internal" href="snap.html"><span class="doc">corresponding features</span></a> of SnapPy?</p></li>
+</ol>
+<ol class="upperalpha simple">
+<li><p>Snap computes hyperbolic structures to whatever precision you specify, not just 212 bits.  However, only some aspects of that structure can be accessed at the higher precision.  In contrast, with ManifoldHP every part of the SnapPea kernel uses the high-precision structure.  Eventually, we hope to add a ManifoldAP which allows for arbitrary precision throughout the kernel.</p></li>
+</ol>
+<ol class="upperalpha simple" start="17">
+<li><p>Are there any negatives to using ManifoldHP over Manifold?</p></li>
+</ol>
+<ol class="upperalpha simple">
+<li><p>Yes, ManifoldHP is generally slower by a factor of 10 to 100.  Multiplying two quad-double numbers requires at least 10 ordinary double multiplications, so some of this is inevitable.</p></li>
+</ol>
+<ol class="upperalpha simple" start="17">
+<li><p>What is one place where the extra precision really helps?</p></li>
+</ol>
+<ol class="upperalpha simple">
+<li><p>Computing Dirichlet domains and subsidiary things like the length spectrum. A ManifoldHP can find the Dirichlet domain of a typically 15 crossing knot exterior but Manifold can’t.</p></li>
+</ol>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ManifoldHP: High-precision variant</a><ul>
+<li><a class="reference internal" href="#faq">FAQ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="manifold.html"
+                        title="previous chapter">Manifold: the main class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="triangulation.html"
+                        title="next chapter">Triangulation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/manifoldhp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="triangulation.html" title="Triangulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="manifold.html" title="Manifold: the main class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 3.0.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" >The snappy module and its classes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ManifoldHP: High-precision variant</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2009-2021, by Marc Culler, Nathan Dunfield, Matthias Goerner, Jeffrey Weeks and others.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>

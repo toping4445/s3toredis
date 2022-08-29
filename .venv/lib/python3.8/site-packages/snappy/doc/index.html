@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>SnapPy &#8212; SnapPy 3.0.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing SnapPy" href="installing.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installing.html" title="Installing SnapPy"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SnapPy 3.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SnapPy</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="snappy">
+<h1>SnapPy<a class="headerlink" href="#snappy" title="Permalink to this headline">¶</a></h1>
+<section id="what-is-snappy">
+<h2>What is SnapPy?<a class="headerlink" href="#what-is-snappy" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/SnapPy-196.png" class="align-right" src="_images/SnapPy-196.png" />
+<p>SnapPy is a program for studying the topology and geometry of
+3-manifolds, with a focus on hyperbolic structures.  It runs on Mac OS
+X, Linux, and Windows, and combines a link editor and 3D-graphics for
+Dirichlet domains and cusp neighborhoods with a powerful command-line
+interface based on the <a class="reference external" href="http://python.org">Python</a> programming language. You can see it
+<a class="reference internal" href="screenshots.html"><span class="doc">in action</span></a>, learn how to <a class="reference internal" href="installing.html"><span class="doc">install</span></a>
+it, and watch the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a>.</p>
+</section>
+<section id="news">
+<h2>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Version 3.0.3 (December 2021):</p>
+<ul>
+<li><p>Runs natively on Macs with Apple Silicon processors (M1, M1 Pro, M1 Max).</p></li>
+</ul>
+</li>
+<li><p>Version 3.0.2 (November 2021):</p>
+<ul>
+<li><p>Support for SageMath 9.4 and 9.5, Python 3.10, and macOS Monterey.</p></li>
+</ul>
+</li>
+<li><p>Version 3.0 (April 2021): New features include:</p>
+<ul>
+<li><p>Incorporates Zoltán Szabó’s <a class="reference external" href="https://web.math.princeton.edu/~szabo/HFKcalc.html">program</a> for
+computing Knot Floer homology, see <a class="reference internal" href="spherogram.html#spherogram.Link.knot_floer_homology" title="spherogram.Link.knot_floer_homology"><code class="xref py py-meth docutils literal notranslate"><span class="pre">knot_floer_homology</span></code></a>.  This can compute the
+Seifert genus of a 25 crossing knot in mere seconds!</p></li>
+<li><p>Topological slice obstructions of Herald-Kirk-Livingston, see
+<a class="reference internal" href="manifold.html#snappy.Manifold.slice_obstruction_HKL" title="snappy.Manifold.slice_obstruction_HKL"><code class="xref py py-meth docutils literal notranslate"><span class="pre">slice_obstruction_HKL</span></code></a>.</p></li>
+<li><p>Faster “local” algorithm for <a class="reference internal" href="spherogram.html#spherogram.Link.jones_polynomial" title="spherogram.Link.jones_polynomial"><code class="xref py py-meth docutils literal notranslate"><span class="pre">jones_polynomial</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2010.05840">Cohomology fractals</a> added to
+<a class="reference internal" href="manifold.html#snappy.Manifold.inside_view" title="snappy.Manifold.inside_view"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inside_view</span></code></a>.</p></li>
+<li><p>Convention changes: Sign of knot signature (now positive knots have
+negative signatures), choice of braid generators (now positive
+generators give positive crossings).</p></li>
+<li><p>Updates to methods <a class="reference internal" href="manifold.html#snappy.Manifold.cusp_translations" title="snappy.Manifold.cusp_translations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cusp_translations</span></code></a>, <a class="reference internal" href="manifold.html#snappy.Manifold.cusp_areas" title="snappy.Manifold.cusp_areas"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cusp_areas</span></code></a>, <a class="reference internal" href="manifold.html#snappy.Manifold.short_slopes" title="snappy.Manifold.short_slopes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">short_slopes</span></code></a>. Also <a class="reference internal" href="spherogram.html#spherogram.Link" title="spherogram.Link"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Link</span></code></a>
+now accepts DT codes.</p></li>
+<li><p>Support for SageMath 9.3, Python 3.9, and macOS Big Sur.</p></li>
+<li><p>macOS app now code-signed and notarized.</p></li>
+<li><p>SnapPy now requires Python 3.6 or newer.</p></li>
+</ul>
+</li>
+<li><p>Version 2.8 (June 2020): New features include:</p>
+<ul>
+<li><p>Raytraced interior views of a hyperbolic 3-manifold via the
+<a class="reference internal" href="manifold.html#snappy.Manifold.inside_view" title="snappy.Manifold.inside_view"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inside_view</span></code></a> method, see also
+<a class="reference external" href="https://im.icerm.brown.edu/portfolio/snappy-views/">images</a> and
+<a class="reference external" href="https://youtu.be/CAERhmUCkRs">demo video</a>.</p></li>
+<li><p><a class="reference internal" href="verify.html"><span class="doc">Verified computations</span></a>: Several new features:</p>
+<ul>
+<li><p>Complex volume (and thus the Chern-Simons invariant) for both
+cusped and closed manifolds, see
+<a class="reference internal" href="manifold.html#snappy.Manifold.complex_volume" title="snappy.Manifold.complex_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">complex_volume</span></code></a>.</p></li>
+<li><p>Disjoint cusp neighborhoods by the method <a class="reference internal" href="manifold.html#snappy.Manifold.cusp_areas" title="snappy.Manifold.cusp_areas"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cusp_areas</span></code></a> which uses
+<a class="reference internal" href="manifold.html#snappy.Manifold.cusp_area_matrix" title="snappy.Manifold.cusp_area_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cusp_area_matrix</span></code></a>.</p></li>
+<li><p>Cusp shapes (see <a class="reference internal" href="manifold.html#snappy.Manifold.cusp_info" title="snappy.Manifold.cusp_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cusp_info</span></code></a>).</p></li>
+<li><p>Finding all <a class="reference internal" href="manifold.html#snappy.Manifold.short_slopes" title="snappy.Manifold.short_slopes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">short_slopes</span></code></a>
+in disjoint embedded cusp neighborhoods.</p></li>
+</ul>
+</li>
+<li><p>The census <a class="reference internal" href="censuses.html#snappy.HTLinkExteriors" title="snappy.HTLinkExteriors"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTLinkExteriors</span></code></a> has
+been extended to 15 crossing knots (contributed by Malik
+Obeidin).</p></li>
+<li><p>The census <a class="reference internal" href="censuses.html#snappy.CensusKnots" title="snappy.CensusKnots"><code class="xref py py-class docutils literal notranslate"><span class="pre">CensusKnots</span></code></a> has been
+extended to triangulations with 9 ideal tetrahedra.</p></li>
+<li><p>Support for SageMath 9.0 and macOS Catalina.</p></li>
+<li><p>Development moved to <a class="reference external" href="https://github.com/3-manifolds">GitHub</a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="news.html"><span class="doc">Complete version history</span></a>.</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing SnapPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screenshots.html">Screenshots: SnapPy in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snappy.html">The snappy module and its classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plink.html">Using SnapPy’s link editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spherogram.html">Links: planar diagrams and invariants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snap.html">Number theory of hyperbolic 3-manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verify.html">Verified computations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">Reporting bugs and other problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">To Do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Basics</a></li>
+</ul>
+</div>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
+<p>Written by <a class="reference external" href="http://www.math.uic.edu/~culler">Marc Culler</a>, <a class="reference external" href="http://dunfield.info">Nathan
+Dunfield</a>, and <a class="reference external" href="http://www.unhyperbolic.org/">Matthias Goerner</a> using the SnapPea kernel written by
+<a class="reference external" href="http://www.geometrygames.org">Jeff Weeks</a>, with contributions from
+<a class="reference internal" href="credits.html"><span class="doc">many others</span></a>.  If you use SnapPy in your work, please
+<a class="reference internal" href="credits.html#citing-snappy"><span class="std std-ref">cite it as described here</span></a>.  If you
+encounter problems with SnapPy, <a class="reference internal" href="bugs.html"><span class="doc">please report them</span></a>.</p>
+<p>Released under the terms of the <a class="reference external" href="http://www.gnu.org/licenses/gpl-2.0.txt">GNU General Public License</a>, version 2 or later.</p>
+<p>The development of SnapPy was partially supported by grants from the
+National Science Foundation, including DMS-0707136, DMS-0906155,
+DMS-1105476, DMS-1510204, DMS-1811156, and the Institute for
+Computational and Experimental Research in Mathematics. Any opinions,
+findings, and conclusions or recommendations expressed on this site
+are those of the authors and do not necessarily reflect the views of
+the National Science Foundation.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SnapPy</a><ul>
+<li><a class="reference internal" href="#what-is-snappy">What is SnapPy?</a></li>
+<li><a class="reference internal" href="#news">News</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#credits">Credits</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installing.html"
+                        title="next chapter">Installing SnapPy</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installing.html" title="Installing SnapPy"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SnapPy 3.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SnapPy</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2009-2021, by Marc Culler, Nathan Dunfield, Matthias Goerner, Jeffrey Weeks and others.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>

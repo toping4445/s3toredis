@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Triangulation &#8212; SnapPy 3.0.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Additional Classes" href="additional_classes.html" />
+    <link rel="prev" title="ManifoldHP: High-precision variant" href="manifoldhp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="additional_classes.html" title="Additional Classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="manifoldhp.html" title="ManifoldHP: High-precision variant"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 3.0.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" accesskey="U">The snappy module and its classes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Triangulation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="triangulation">
+<h1>Triangulation<a class="headerlink" href="#triangulation" title="Permalink to this headline">¶</a></h1>
+<p>The main snappy class, namely Manifold, is derived from more
+basic class below.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="snappy.Triangulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">snappy.</span></span><span class="sig-name descname"><span class="pre">Triangulation</span></span><a class="headerlink" href="#snappy.Triangulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Triangulation object represents a compact 3-manifold with torus
+boundary components, given as an ideal triangulation of the
+manifold’s interior.  A Dehn-filling can be specified for each
+boundary component, allowing the description of closed 3-manifolds
+and some orbifolds.  For non-orientable 3-manifolds, the boundary
+components can also be Klein bottles. Two Triangulations are equal
+(‘==’) if they represent combinatorially isomorphic
+triangulations.  A Triangulation does <em>not</em> have any geometric
+structure, and usually one works with the subclass Manifold which
+adds this.  Here’s a quick example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Triangulation</span><span class="p">(</span><span class="s1">&#39;9_42&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">num_tetrahedra</span><span class="p">()</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">is_orientable</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A Triangulation can be specified in a number of ways, e.g.</p>
+<ul class="simple">
+<li><p>Triangulation(‘9_42’) : The complement of the knot 9_42 in S^3.</p></li>
+<li><p>Triangulation(‘m125(1,2)(4,5)’) : The SnapPea census manifold m125
+where the first cusp has Dehn filling (1,2) and the second cusp has
+filling (4,5).</p></li>
+<li><p>Triangulation() : Opens a link editor window where can you
+specify a link complement.</p></li>
+</ul>
+<p>In general, the specification can be from among the below, with
+information on Dehn fillings added.</p>
+<ul>
+<li><p>SnapPea cusped census manifolds: e.g. ‘m123’, ‘s123’, ‘v123’.</p></li>
+<li><dl class="simple">
+<dt>Link complements:</dt><dd><ul class="simple">
+<li><p>Rolfsen’s table: e.g. ‘4_1’, ‘04_1’, ‘5^2_6’, ‘6_4^7’, ‘L20935’, ‘l104001’.</p></li>
+<li><p>Knots and links up to 14 crossings from tabulations by Hoste
+and Thistlethwaite: e.g. ‘K12a456’ or ‘L13n579’.</p></li>
+<li><p>Hoste-Thistlethwaite Knotscape table:  e.g. ‘11a17’ or ‘12n345’</p></li>
+<li><p>Dowker-Thistlethwaite code: e.g. ‘DT:[(6,8,2,4)]’, ‘DT:dadbcda’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Once-punctured torus bundles: e.g. ‘b++LLR’, ‘b+-llR’, ‘bo-RRL’, ‘bn+LRLR’</p></li>
+<li><p>Fibered manifold associated to a braid: ‘Braid:[1,2,-3,4]’</p>
+<p>Here, the braid is thought of as a mapping class of the
+punctured disc, and this manifold is the corresponding
+mapping torus.  If you want the braid closure, do (1,0) filling
+of the last cusp.</p>
+</li>
+<li><p>From mapping class group data using Twister:</p>
+<p>‘Bundle(S_{1,1}, [a0, B1])’ or ‘Splitting(S_{1,0}, [b1, A0], [a0,B1])’</p>
+<p>See the help for the ‘twister’ module for more.</p>
+</li>
+<li><p>A SnapPea triangulation or link projection file: ‘filename’</p>
+<p>The file will be loaded if found in the current directory or the
+path given by the shell variable SNAPPEA_MANIFOLD_DIRECTORY.</p>
+</li>
+<li><p>A Regina-style isomorphism signature, such as ‘dLQbcccdxwb’.</p></li>
+<li><p>A string containing the contents of a SnapPea triangulation or link
+projection file.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="snappy.Triangulation.alexander_polynomial">
+<span class="sig-name descname"><span class="pre">alexander_polynomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snappy.Triangulation.alexander_polynomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the multivariable Alexander polynomial of the manifold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;K12n123&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">alexander_polynomial</span><span class="p">()</span>
+<span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">14</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">34</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">45</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">34</span><span class="o">*</span><span class="n">a</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">14</span><span class="o">*</span><span class="n">a</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="n">sage</span><span class="p">:</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Triangulation</span><span class="p">(</span><span class="s1">&#39;v1539(5,1)&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">N</span><span class="o">.</span><span class="n">alexander_polynomial</span><span class="p">()</span>
+<span class="n">a</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Any provided keyword arguments are passed to fundamental_group and
+so affect the group presentation used in the computation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snappy.Triangulation.homological_longitude">
+<span class="sig-name descname"><span class="pre">homological_longitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cusp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snappy.Triangulation.homological_longitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the peripheral curve in the given cusp, if any, which is
+homologically trivial (with rational coefficients) in the manifold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;m015&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">homological_longitude</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If no cusp is specified, the default is the first unfilled cusp;
+if all cusps are filled, the default is the first cusp:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;L5a1(3,4)(0,0)&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">homological_longitude</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The components of the next link have nontrivial linking number
+so there is no such curve:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">W</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;L7a2&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">W</span><span class="o">.</span><span class="n">homological_longitude</span><span class="p">(</span><span class="n">cusp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="kc">True</span>
+</pre></div>
+</div>
+<p>If every curve in the given cusp is trivial in the rational homology of
+the manifold, an exception is raised:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;4_1(1,0)&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">homological_longitude</span><span class="p">()</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="o">...</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">Every</span> <span class="n">curve</span> <span class="n">on</span> <span class="n">cusp</span> <span class="ow">is</span> <span class="n">homologically</span> <span class="n">trivial</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snappy.Triangulation.normal_boundary_slopes">
+<span class="sig-name descname"><span class="pre">normal_boundary_slopes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FXrays'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snappy.Triangulation.normal_boundary_slopes" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a one-cusped manifold, returns all the nonempty boundary slopes of
+spun normal surfaces.  Provided the triangulation supports a
+genuine hyperbolic structure, then by <a class="reference external" href="http://arxiv.org/abs/math/0503027">Thurston and Walsh</a> any strict boundary slope
+(the boundary of an essential surface which is not a fiber or
+semifiber) must be listed here.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;K3_1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">normal_boundary_slopes</span><span class="p">()</span>
+<span class="go">[(16, -1), (20, -1), (37, -2)]</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">'kabaya'</span></code>, then it only
+returns boundary slopes associated to vertex surfaces with a quad
+in every tetrahedron; by Theorem 1.1. of <a class="reference external" href="http://arxiv.org/abs/1102.4588">[DG]</a> these are all strict boundary
+slopes.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;m113&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="o">.</span><span class="n">normal_boundary_slopes</span><span class="p">()</span>
+<span class="go">[(1, 1), (1, 2), (2, -1), (2, 3), (8, 11)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="o">.</span><span class="n">normal_boundary_slopes</span><span class="p">(</span><span class="s1">&#39;kabaya&#39;</span><span class="p">)</span>
+<span class="go">[(8, 11)]</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">'brasile'</span></code> then it returns
+only the boundary slopes that are associated to vertex surfaces
+giving isolated rays in the space of embedded normal surfaces.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span><span class="o">.</span><span class="n">normal_boundary_slopes</span><span class="p">(</span><span class="s1">&#39;brasile&#39;</span><span class="p">)</span>
+<span class="go">[(1, 2), (8, 11)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snappy.Triangulation.normal_surfaces">
+<span class="sig-name descname"><span class="pre">normal_surfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FXrays'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snappy.Triangulation.normal_surfaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the vertex spun-normal surfaces in the current triangulation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;m004&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">.</span><span class="n">normal_surfaces</span><span class="p">()</span>    
+<span class="go">[&lt;Surface 0: [0, 0] [1, 2] (4, 1)&gt;,</span>
+<span class="go"> &lt;Surface 1: [0, 1] [1, 2] (4, -1)&gt;,</span>
+<span class="go"> &lt;Surface 2: [1, 2] [2, 1] (-4, -1)&gt;,</span>
+<span class="go"> &lt;Surface 3: [2, 2] [2, 1] (-4, 1)&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snappy.Triangulation.slice_obstruction_HKL">
+<span class="sig-name descname"><span class="pre">slice_obstruction_HKL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primes_spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_in_S3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snappy.Triangulation.slice_obstruction_HKL" title="Permalink to this definition">¶</a></dt>
+<dd><p>For the exterior of a knot in S^3, searches for a topological
+slicing obstruction from:</p>
+<p>Herald, Kirk, Livingston, Math Zeit., 2010
+<a class="reference external" href="https://dx.doi.org/10.1007/s00209-009-0548-1">https://dx.doi.org/10.1007/s00209-009-0548-1</a>
+<a class="reference external" href="https://arxiv.org/abs/0804.1355">https://arxiv.org/abs/0804.1355</a></p>
+<p>The test looks at the cyclic branched covers of the knot of prime
+order p and the F_q homology thereof where q is an odd prime. The
+range of such (p, q) pairs searched is given by primes_spec as a
+list of (p_max, [q_min, q_max]).  It returns the pair (p, q) of
+the first nonzero obstruction found (in which case K is not
+slice), and otherwise returns None:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="s1">&#39;K12n813&#39;</span><span class="p">)</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">]),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])]</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">slice_obstruction_HKL</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+   <span class="n">Looking</span> <span class="n">at</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">...</span>
+   <span class="n">Looking</span> <span class="n">at</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">...</span>
+   <span class="n">Looking</span> <span class="n">at</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">...</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If primes_spec is just a pair (p, q) then only that obstruction is
+checked:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">slice_obstruction_HKL</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">sage</span><span class="p">:</span> <span class="n">M</span><span class="o">.</span><span class="n">slice_obstruction_HKL</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Technical note: As implemented, can only get an obstruction when
+the decomposition of H_1(cover; F_q) into irreducible Z/pZ-modules
+has no repeat factors.  The method of [HKL] can be used more
+broadly, but other cases requires computing many more twisted
+Alexander polynomials.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="manifoldhp.html"
+                        title="previous chapter">ManifoldHP: High-precision variant</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="additional_classes.html"
+                        title="next chapter">Additional Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/triangulation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="additional_classes.html" title="Additional Classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="manifoldhp.html" title="ManifoldHP: High-precision variant"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SnapPy 3.0.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="snappy.html" >The snappy module and its classes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Triangulation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2009-2021, by Marc Culler, Nathan Dunfield, Matthias Goerner, Jeffrey Weeks and others.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>
