@@ -1,5 +1,6 @@
 redis-py-cluster
 pyarrow
 s3fs
-snappy
+python-snappy
 boto3==1.21.21
+pandas

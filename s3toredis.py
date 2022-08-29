@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pyarrow.parquet as pq
 import s3fs
 from rediscluster import RedisCluster
@@ -21,16 +23,21 @@ MIN_KEY_VALUE = os.environ.get("MIN_KEY_VALUE", 1)
 MAX_KEY_VALUE = os.environ.get("MAX_KEY_VALUE", 2500000)
 BUCKET = os.environ.get("BUCKET", "sagemaker-yelo-test")
 TABLE_NAME = os.environ.get("TABLE_NAME", "rms_features_feast")
-REDIS_HOST = os.environ.get("REDIS_HOST", "")
+REDIS_HOST = os.environ.get("REDIS_HOST","feast-datahub.0437il.clustercfg.apn2.cache.amazonaws.com")
 REDIS_PORT = os.environ.get("REDIS_PORT", "6379")
 MODEL_NAME = os.environ.get("MODEL_NAME", "rms")
 MODEL_VERSION = os.environ.get("MODEL_VERSION", "v1")
-RUN_EXPIRATION_JOB = os.environ.get("RUN_EXPIRATION_JOB", 1)
-TESTING = os.environ.get("TESTING", 0)
+RUN_EXPIRATION_JOB = os.environ.get("RUN_EXPIRATION_JOB", 0)
+TESTING = os.environ.get("TESTING", 1)
 
 
 
-s3_fs = s3fs.S3FileSystem()
+s3_fs = s3fs.S3FileSystem(key=ACCESS_KEY, secret = SECRET_KEY, token = SESSION_TOKEN)
+logging.info(f"REDIS_HOST : {REDIS_HOST}")
+logging.info(f"TESTING : {str(TESTING)}")
+logging.info(f"RUN_EXPIRATION_JOB : {str(RUN_EXPIRATION_JOB)}")
+
+
 rc = RedisCluster(startup_nodes=[{"host": REDIS_HOST,"port": REDIS_PORT}], decode_responses=False,skip_full_coverage_check=True)
 pipe = rc.pipeline()
 
